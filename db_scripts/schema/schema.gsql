@@ -1,0 +1,13 @@
+CREATE VERTEX Country (PRIMARY_ID id STRING) WITH primary_id_as_attribute="true"
+CREATE VERTEX Customer (PRIMARY_ID id STRING) WITH primary_id_as_attribute="true"
+CREATE VERTEX Account (PRIMARY_ID id STRING, init_balance DOUBLE, account_type STRING, tx_behavior INT, pagerank FLOAT, label INT, current_balance DOUBLE, min_send_tx DOUBLE, min_recieve_tx DOUBLE, max_send_tx DOUBLE, max_recieve_tx DOUBLE, avg_send_tx DOUBLE, avg_recieve_tx DOUBLE, cnt_recieve_tx INT, cnt_send_tx INT) WITH primary_id_as_attribute="true"
+CREATE VERTEX Transaction (PRIMARY_ID id STRING, tx_behavior_id INT, amount DOUBLE, is_fraud BOOL) WITH primary_id_as_attribute="true"
+CREATE VERTEX Alert (PRIMARY_ID id STRING, alert_type STRING, ts INT) WITH primary_id_as_attribute="true"
+CREATE UNDIRECTED EDGE Based_In (From Customer, To Country)
+CREATE UNDIRECTED EDGE Customer_Account (From Customer, To Account)
+CREATE UNDIRECTED EDGE Transaction_Flagged (From Transaction, To Alert)
+CREATE DIRECTED EDGE Send_To (From Account, To Account) WITH REVERSE_EDGE="reverse_Send_To"
+CREATE DIRECTED EDGE Send_Transaction (From Account, To Transaction, ts INT, tx_type STRING) WITH REVERSE_EDGE="reverse_Send_Transaction"
+CREATE DIRECTED EDGE Recieve_Transaction (From Transaction, To Account, ts INT, tx_type STRING) WITH REVERSE_EDGE="reverse_Recieve_Transaction"
+
+CREATE GRAPH AMLSim(Country, Customer, Account, Transaction, Alert, Based_In, Customer_Account, Transaction_Flagged, Send_To, Send_Transaction, reverse_Send_Transaction, Recieve_Transaction, reverse_Recieve_Transaction)

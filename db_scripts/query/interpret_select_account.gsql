@@ -1,0 +1,5 @@
+INTERPRET QUERY () FOR GRAPH AMLSim { 
+  seed = {Account.*};
+  S1 = SELECT s FROM seed:s WHERE s.id == "9913"; 
+  PRINT S1; 
+}

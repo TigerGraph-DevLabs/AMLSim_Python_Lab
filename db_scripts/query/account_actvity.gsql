@@ -1,0 +1,46 @@
+CREATE QUERY account_activity() FOR GRAPH AMLSim { 
+  
+  SumAccum<DOUBLE> @s_sumAmt, @r_sumAmt;
+  SumAccum<DOUBLE> @s_txCnt, @r_txCnt;
+  MinAccum<DOUBLE> @s_minAmt, @r_minAmt;
+  MaxAccum<DOUBLE> @s_maxAmt, @r_maxAmt;
+  AvgAccum @s_avgAmt, @r_avgAmt;
+
+  
+  
+  Seed = {Account.*};
+  
+  acctSend = SELECT tgt FROM Seed:s -(Send_Transaction:e)-> Transaction:tgt
+             ACCUM s.@s_sumAmt += tgt.amount, 
+                   s.@s_txCnt += 1,
+                   s.@s_minAmt += tgt.amount, 
+                   s.@s_maxAmt += tgt.amount,
+                   s.@s_avgAmt += tgt.amount
+            POST-ACCUM
+                s.current_balance = s.@s_sumAmt - s.init_balance,
+                s.min_send_tx = s.@s_minAmt,
+                s.max_send_tx = s.@s_maxAmt,
+                s.avg_send_tx = s.@s_avgAmt,
+                s.cnt_send_tx = s.@s_txCnt;
+                
+
+  
+  acctRecieve = SELECT tgt FROM Seed:s -(reverse_Recieve_Transaction:e)-> Transaction:tgt
+                ACCUM s.@r_sumAmt += tgt.amount, 
+                      s.@r_txCnt += 1,
+                      s.@r_minAmt += tgt.amount, 
+                      s.@r_maxAmt += tgt.amount,
+                      s.@r_avgAmt += tgt.amount
+                      
+                POST-ACCUM
+                  s.current_balance = s.@r_sumAmt + s.init_balance,
+                  s.min_recieve_tx = s.@r_minAmt,
+                  s.max_recieve_tx = s.@r_maxAmt,
+                  s.avg_recieve_tx = s.@r_avgAmt,
+                  s.cnt_recieve_tx = s.@r_txCnt;
+              
+  PRINT "Features Have Been Calculated";
+
+}
+
+INSTALL QUERY account_activity
