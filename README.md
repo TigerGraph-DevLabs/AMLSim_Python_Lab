@@ -1,7 +1,7 @@
 # AMLSim_Python_Lab
 
-Folder Structure
-================
+### Folder Structure
+
 ```
 AMLSim_Python_Lab
 ├── data
