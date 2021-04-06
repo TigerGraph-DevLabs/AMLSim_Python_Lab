@@ -11,6 +11,8 @@ AMLSim_Python_Lab
 ├── db_scripts
 │   ├── load
 |   |    └── create
+├── import
+|   └── AMLSim_3_0_6.gz
 │   ├── query
 │   |   ├── account_activity.gsql
 │   |   ├── interpret_select_account.gsql
