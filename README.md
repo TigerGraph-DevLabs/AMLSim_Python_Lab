@@ -11,8 +11,6 @@ AMLSim_Python_Lab
 ├── db_scripts
 │   ├── load
 |   |    └── create
-├── import
-|   └── AMLSim_3_0_6.gz
 │   ├── query
 │   |   ├── account_activity.gsql
 │   |   ├── interpret_select_account.gsql
@@ -23,6 +21,8 @@ AMLSim_Python_Lab
 │   |   └── select_top_page_rank.gsql
 |   └── schema
 |       └── schema.gsql
+├── import
+|   └── AMLSim_3_0_6.gz
 ├── notebooks
 │   └── TigerGraph_AMLSim_Demo.ipynb
 └── README.md
