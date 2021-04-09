@@ -1,4 +1,7 @@
 # AMLSim_Python_Lab
+Try running this lab in Google Colab
+
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1QnYXgypDYKMxuGfMLEtWcIVkp61njkrw?usp=sharing)
 
 ### Folder Structure
 
