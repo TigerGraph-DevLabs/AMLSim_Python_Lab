@@ -1,0 +1,16 @@
+CREATE QUERY accountInfo(INT limit_x) FOR GRAPH AMLSim { 
+  
+  /*
+    Grabs the account info for limit_x accounts
+  */
+  
+  Seed = {Account.*};
+  
+  S3 = SELECT a FROM Seed:a 
+         LIMIT limit_x;
+  
+  PRINT S3; 
+  
+}
+
+INSTALL QUERY accountInfo
