@@ -13,7 +13,9 @@ AMLSim_Python_Lab
 │   └── transactions.csv
 ├── db_scripts
 │   ├── load
-|   |    └── create
+|   |    ├── load_job_accounts.gsql
+|   |    ├── load_job_alerts.gsql
+|   |    └── load_job_transactions.gsql
 │   ├── query
 │   |   ├── account_activity.gsql
 │   |   ├── interpret_select_account.gsql
