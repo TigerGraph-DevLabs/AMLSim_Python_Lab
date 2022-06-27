@@ -1,0 +1,13 @@
+USE GRAPH AMLSim
+
+DROP JOB load_job_transactions
+CREATE LOADING JOB load_job_transactions FOR GRAPH AMLSim {
+      DEFINE FILENAME MyDataSource;
+      LOAD MyDataSource TO VERTEX Transaction VALUES($0, _, $4, $6) USING SEPARATOR=",", HEADER="true", EOL="\n";
+      LOAD MyDataSource TO EDGE SEND_TO VALUES($1, $2) USING SEPARATOR=",", HEADER="true", EOL="\n";
+      LOAD MyDataSource TO EDGE SEND_TRANSACTION VALUES($1, $0, $5, $3) USING SEPARATOR=",", HEADER="true", EOL="\n";
+      LOAD MyDataSource TO EDGE RECEIVE_TRANSACTION VALUES($0, $2, $5, $3) USING SEPARATOR=",", HEADER="true", EOL="\n";
+}
+
+RUN LOADING JOB load_job_transactions USING MyDataSource="../../data/transactions.csv"
+
