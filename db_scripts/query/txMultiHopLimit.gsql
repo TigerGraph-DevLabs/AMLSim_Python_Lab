@@ -1,3 +1,5 @@
+USE GRAPH AMLSim
+
 CREATE QUERY txMultiHopLimit() FOR GRAPH AMLSim SYNTAX v2 { 
 
   /*
@@ -9,7 +11,7 @@ CREATE QUERY txMultiHopLimit() FOR GRAPH AMLSim SYNTAX v2 {
   
   Seed = {Transaction.*};
   
-  acctSend = SELECT tgt FROM Seed:s -( (reverse_Send_Transaction> |  Recieve_Transaction>):e)- Account:tgt
+  acctSend = SELECT tgt FROM Seed:s -( (reverse_SEND_TRANSACTION> |  RECEIVE_TRANSACTION>):e)- Account:tgt
       ACCUM @@txRecords += ORDER_TX(s.is_fraud, s.amount, tgt.pagerank, tgt.label, tgt.min_send_tx, tgt.min_recieve_tx, tgt.max_send_tx, tgt.max_recieve_tx, tgt.avg_send_tx, tgt.avg_recieve_tx, tgt.cnt_recieve_tx, tgt.cnt_send_tx, e.ts, tgt.pagerank, tgt.label, tgt.min_send_tx, tgt.min_recieve_tx, tgt.max_send_tx, tgt.max_recieve_tx, tgt.avg_send_tx, tgt.avg_recieve_tx, tgt.cnt_recieve_tx, tgt.cnt_send_tx, e.ts);
 
 

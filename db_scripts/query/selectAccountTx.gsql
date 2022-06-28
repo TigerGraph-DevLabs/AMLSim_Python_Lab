@@ -1,0 +1,18 @@
+USE GRAPH AMLSim
+
+CREATE QUERY selectAccountTx(STRING acct) FOR GRAPH AMLSim { 
+  ListAccum<EDGE> @@txSend, @@txRecieve;
+  seed = {Account.*};
+ 
+  SendTx = SELECT tgt FROM seed:s -(SEND_TRANSACTION:e)-> Transaction:tgt
+           WHERE s.id == acct
+           ACCUM @@txSend +=  e;
+ 
+  RecieveTx = SELECT tgt FROM seed:s -(reverse_RECEIVE_TRANSACTION:e)-> Transaction:tgt
+              WHERE s.id == acct
+              ACCUM @@txRecieve += e;
+ 
+  PRINT @@txSend, @@txRecieve; 
+}
+
+INSTALL QUERY selectAccountTx

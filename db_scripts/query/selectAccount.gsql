@@ -1,0 +1,9 @@
+USE GRAPH AMLSim
+
+CREATE QUERY selectAccount(STRING acct) FOR GRAPH AMLSim { 
+  seed = {Account.*};
+  S1 = SELECT s FROM seed:s WHERE s.id == acct; 
+  PRINT S1; 
+}
+
+INSTALL QUERY selectAccount

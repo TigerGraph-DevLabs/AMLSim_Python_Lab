@@ -1,4 +1,6 @@
-CREATE QUERY page_rank (STRING v_type, STRING e_type,
+USE GRAPH AMLSim
+
+CREATE QUERY pageRank (STRING v_type, STRING e_type,
  FLOAT max_change=0.001, INT max_iter=25, FLOAT damping=0.85, INT top_k = 100,
  BOOL print_accum = TRUE, STRING result_attr =  "", STRING file_path = "",
  BOOL display_edges = FALSE) FOR GRAPH AMLSim{
@@ -61,4 +63,4 @@ CREATE QUERY page_rank (STRING v_type, STRING e_type,
 	END;
 }
 
-INSTALL QUERY page_rank
+INSTALL QUERY pageRank
