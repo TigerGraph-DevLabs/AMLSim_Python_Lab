@@ -1,4 +1,6 @@
-CREATE QUERY account_activity() FOR GRAPH AMLSim { 
+USE GRAPH AMLSim
+
+CREATE QUERY accountActivity() FOR GRAPH AMLSim { 
   
   SumAccum<DOUBLE> @s_sumAmt, @r_sumAmt;
   SumAccum<DOUBLE> @s_txCnt, @r_txCnt;
@@ -10,7 +12,7 @@ CREATE QUERY account_activity() FOR GRAPH AMLSim {
   
   Seed = {Account.*};
   
-  acctSend = SELECT tgt FROM Seed:s -(Send_Transaction:e)-> Transaction:tgt
+  acctSend = SELECT tgt FROM Seed:s -(SEND_TRANSACTION:e)-> Transaction:tgt
              ACCUM s.@s_sumAmt += tgt.amount, 
                    s.@s_txCnt += 1,
                    s.@s_minAmt += tgt.amount, 
@@ -25,7 +27,7 @@ CREATE QUERY account_activity() FOR GRAPH AMLSim {
                 
 
   
-  acctRecieve = SELECT tgt FROM Seed:s -(reverse_Recieve_Transaction:e)-> Transaction:tgt
+  acctRecieve = SELECT tgt FROM Seed:s -(reverse_RECEIVE_TRANSACTION:e)-> Transaction:tgt
                 ACCUM s.@r_sumAmt += tgt.amount, 
                       s.@r_txCnt += 1,
                       s.@r_minAmt += tgt.amount, 
@@ -43,4 +45,4 @@ CREATE QUERY account_activity() FOR GRAPH AMLSim {
 
 }
 
-INSTALL QUERY account_activity
+INSTALL QUERY accountActivity

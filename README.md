@@ -13,15 +13,19 @@ AMLSim_Python_Lab
 │   └── transactions.csv
 ├── db_scripts
 │   ├── load
-|   |    └── create
+|   |    ├── load_job_accounts.gsql
+|   |    ├── load_job_alerts.gsql
+|   |    └── load_job_transactions.gsql
 │   ├── query
-│   |   ├── account_activity.gsql
+│   |   ├── accountActivity.gsql
+│   |   ├── accountInfo.gsql
 │   |   ├── interpret_select_account.gsql
 │   |   ├── label_prop.gsql
-│   |   ├── page_rank.gsql
-│   |   ├── select_account_tx.gsql
-│   |   ├── select_account.gsql
-│   |   └── select_top_page_rank.gsql
+│   |   ├── pageRank.gsql
+│   |   ├── selectAccount.gsql
+│   |   ├── selectAccountTx.gsql
+│   |   ├── selectTopPageRank.gsql
+│   |   └── txMultiHopLimit.gsql
 |   └── schema
 |       └── schema.gsql
 ├── import

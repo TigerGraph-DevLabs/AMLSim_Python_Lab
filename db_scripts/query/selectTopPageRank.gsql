@@ -1,0 +1,9 @@
+USE GRAPH AMLSim
+
+CREATE QUERY selectTopPageRank() FOR GRAPH AMLSim { 
+  seed = {Account.*};
+  S1 = SELECT s FROM seed:s ORDER BY s.pagerank DESC LIMIT 10;
+  PRINT S1; 
+}
+
+INSTALL QUERY selectTopPageRank
